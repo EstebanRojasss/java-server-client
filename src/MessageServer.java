@@ -45,6 +45,7 @@ public class MessageServer {
                 @Override
                 public void run() {
                     try {
+                        msg = in.readUTF();
                         while (msg != null) {
                             System.out.println(msg);
                             msg = in.readUTF();
