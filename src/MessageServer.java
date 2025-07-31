@@ -27,7 +27,6 @@ public class MessageServer {
                 @Override
                 public void run() {
                     try {
-                        msg = sc.nextLine();
                         while (true) {
                             msg = sc.nextLine();
                             out.writeUTF(msg);
