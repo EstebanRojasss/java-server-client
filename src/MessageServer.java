@@ -1,8 +1,12 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class MessageServer {
@@ -67,8 +71,31 @@ public class MessageServer {
         }
 
 
+    }
 
+    private static void enviarMensajeAPI(String remitente, String destinatario, String contenido) {
+        try {
+            URL url = new URL("http://localhost:8082/api/mensajes"); // URL de tu API REST
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setDoOutput(true);
 
+            String jsonInputString = String.format(
+                    "{\"remitente\": \"%s\", \"destinatario\": \"%s\", \"contenido\": \"%s\"}",
+                    remitente, destinatario, contenido
+            );
+
+            try (OutputStream os = con.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            int code = con.getResponseCode();
+            System.out.println("Respuesta del backend: " + code);
+        } catch (Exception e) {
+            System.out.println("Error al enviar mensaje al backend: " + e.getMessage());
+        }
     }
 
 
