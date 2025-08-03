@@ -52,6 +52,9 @@ public class MessageServer {
                         msg = in.readUTF();
                         while (msg != null) {
                             System.out.println(msg);
+
+                            enviarMensajeAPI("user1", "user2", msg);
+
                             msg = in.readUTF();
                         }
 
