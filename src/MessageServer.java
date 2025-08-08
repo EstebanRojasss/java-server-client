@@ -78,7 +78,7 @@ public class MessageServer {
 
     private static void enviarMensajeAPI(String remitente, String destinatario, String contenido) {
         try {
-            URL url = new URL("http://localhost:8082/api/mensajes");
+            URL url = new URL("http://localhost:8081/api/mensajes");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json; utf-8");

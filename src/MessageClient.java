@@ -18,7 +18,7 @@ public class MessageClient {
             Scanner sc = new Scanner(System.in);
 
             Thread sender = new Thread(new Runnable() {
-                private String msg;
+                private String  msg;
 
                 @Override
                 public void run() {
